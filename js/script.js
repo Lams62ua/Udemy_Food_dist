@@ -2,8 +2,8 @@
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    //TABS...
-    //vars
+    // ===== TABS...===== 
+    //var`s
     const tabs = document.querySelectorAll('.tabheader__item'), 
           tabsContent = document.querySelectorAll('.tabcontent'), 
           tabsParent = document.querySelector('.tabheader__items');
@@ -42,8 +42,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     //...TABS
 
-    // TIMER...
-    //Var`s
+    // ===== TIMER... =====
+    //var`s
     const deadline = '2022-10-18'; 
 
     // Функція - returns - залишок (різницю) часу. 
@@ -81,7 +81,7 @@ window.addEventListener('DOMContentLoaded', () => {
               seconds = timer.querySelector('#seconds'),
               timeInterval = setInterval(updateClock, 1000); 
         
-        // // Функція - оновлює таймер кожні 1000 мс
+        // Функція - оновлює таймер кожні 1000 мс
         updateClock(); 
 
         function updateClock() {
@@ -98,7 +98,68 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
     setClockToPage('.timer', deadline);   // Argumenst goes to str.88
+    //...TIMER 
+
+    // ===== MODAL window ===== 
+    //var`s 
+    const modalTrigger = document.querySelectorAll('[data-modal]'), 
+          modal = document.querySelector('.modal'), 
+          modalCloseBtn = document.querySelector('[data-close]'); 
+
+        // Перебор для двох кнопок
+        modalTrigger.forEach(btn => {
+            btn.addEventListener('click', () => { 
+                modal.classList.add('show'); 
+                modal.classList.remove('hide'); 
+                document.body.style.overflow = 'hidden'; 
+            });
+        }); 
+        
+        // DRYSLF
+        function closeModal() {
+            modal.classList.add('hide'); 
+            modal.classList.remove('show'); 
+            document.body.style.overflow = ''; 
+        }
+        // Перебор не потрібно так як кнопка одна 
+        modalCloseBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal(); 
+            }
+        }); 
+
+        // Close Modal with ESC
+        document.addEventListener('keydown', (e) => {
+            // if (e.code === 'Escape') {           -->  Так на ESC буде реагувати постійно
+            if (e.code === 'Escape' && modal.classList.contains('show')) {
+                closeModal(); 
+            }
+        }); 
+
+    //toggle version ??? !!! error 
+        // modalTrigger.addEventListener('click', () => {
+        //     modal.classList.toggle('show'); 
+        //     document.body.style.overflow = 'hidden'; 
+        // }); 
+
+        // modalCloseBtn.addEventListener('click', () => {
+        //     modal.classList.toggle('show'); 
+        //     document.body.style.overflow = ''; 
+        // }); 
+    //...MODAL 
 
 
 }); // DOMContentLoaded 
+
+
+
+
+
+
+
+
+
+
 
